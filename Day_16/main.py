@@ -6,17 +6,18 @@ from money_machine import MoneyMachine
 
 
 def main():
-  new_order = True
+  is_on = True
   menu = Menu()
   money_machine  = MoneyMachine()
   coffee_maker = CoffeeMaker()
   
-  while new_order:
+  while is_on:
    order = input(f"\n\nWhat would you like? ({menu.get_items()}): ")
    match order:
      case "off":
-       new_order = False
+       is_on = False
      case "report":
+       coffee_maker.report()
        money_machine.report()
      case _:
       drink = menu.find_drink(order)
