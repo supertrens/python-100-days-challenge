@@ -15,6 +15,7 @@ class Snake:
   def __init__(self) -> None:
     self.segment_list = []
     self.create_snake()
+    self.head = self.segment_list[0]
 
   def create_snake(self):
     for num in range(0, MIN_SEGMENT):
@@ -29,12 +30,8 @@ class Snake:
     segment.goto(gap_x, 0)
     return segment
   
-  def get_head(self):
-    return self.segment_list[0]
-  
   def move_forward(self):
     # local variables to set updated position
-    head =  self.segment_list[0]
     max_range = len(self.segment_list) - 1
     min_range = 0
     step = -1
@@ -45,25 +42,21 @@ class Snake:
       
       current_segment.goto(previous_segment.pos())
       
-    head.forward(MOVE_PACE)
+    self.head.forward(MOVE_PACE)
   
   def move_up(self):
-    head = self.get_head()
-    if head.heading() != DIRECTION["down"]:
-      head.setheading(DIRECTION["up"])
+    if self.head.heading() != DIRECTION["down"]:
+      self.head.setheading(DIRECTION["up"])
 
   def move_down(self):
-    head = self.get_head()
-    if head.heading() != DIRECTION["up"]:
-      head.setheading(DIRECTION["down"])
+    if self.head.heading() != DIRECTION["up"]:
+      self.head.setheading(DIRECTION["down"])
   
   def move_left(self):
-    head = self.get_head()
-    if head.heading() != DIRECTION["right"]:
-      head.setheading(DIRECTION["left"])
+    if self.head.heading() != DIRECTION["right"]:
+      self.head.setheading(DIRECTION["left"])
 
   def move_right(self):
-    head = self.get_head()
-    if head.heading() != DIRECTION["left"]:
-      head.setheading(DIRECTION["right"])
+    if self.head.heading() != DIRECTION["left"]:
+      self.head.setheading(DIRECTION["right"])
 
