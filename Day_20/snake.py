@@ -1,24 +1,36 @@
 from turtle import Turtle
 
+MIN_SEGMENT = 3
+SEGMENT_SIZE = 20
+MOVE_PACE = 20
+
+DIRECTION = {
+  "up" : 90,
+  "down" : 270,
+  "left": 180,
+  "right" : 0
+}
 class Snake:
-  MIN_SEGMENT = 3
-  SEGMENT_SIZE = 20
-  
+
   def __init__(self) -> None:
     self.segment_list = []
-    
-    for num in range(0, self.MIN_SEGMENT):
-      gap_x = num * -self.SEGMENT_SIZE
+    self.create_snake()
+
+  def create_snake(self):
+    for num in range(0, MIN_SEGMENT):
+      gap_x = num * (- SEGMENT_SIZE)
       segment = self.create_segment(gap_x)
       self.segment_list.append(segment)
-
-
+      
   def create_segment(self, gap_x):
     segment = Turtle(shape="square")
     segment.penup()
     segment.color("#f3f3f3")
     segment.goto(gap_x, 0)
     return segment
+  
+  def get_head(self):
+    return self.segment_list[0]
   
   def move_forward(self):
     # local variables to set updated position
@@ -33,20 +45,25 @@ class Snake:
       
       current_segment.goto(previous_segment.pos())
       
-    head.forward(10)
+    head.forward(MOVE_PACE)
   
   def move_up(self):
-    head = self.segment_list[0]
-    if head.heading() == -90:
-      pass
-    else:
-      head.setheading(90)
-
+    head = self.get_head()
+    if head.heading() != DIRECTION["down"]:
+      head.setheading(DIRECTION["up"])
 
   def move_down(self):
-    head = self.segment_list[0]
-    if head.heading() == 90:
-      pass
-    else:
-      head.setheading(-90)
-    
+    head = self.get_head()
+    if head.heading() != DIRECTION["up"]:
+      head.setheading(DIRECTION["down"])
+  
+  def move_left(self):
+    head = self.get_head()
+    if head.heading() != DIRECTION["right"]:
+      head.setheading(DIRECTION["left"])
+
+  def move_right(self):
+    head = self.get_head()
+    if head.heading() != DIRECTION["left"]:
+      head.setheading(DIRECTION["right"])
+

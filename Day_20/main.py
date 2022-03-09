@@ -14,8 +14,16 @@ game_is_on = True
 
 snake = Snake()
 
-screen.onkey(key="w", fun=snake.move_up)
-screen.onkey(key="s", fun=snake.move_down)
+def stop_game():
+  global game_is_on
+  
+  game_is_on = False
+  
+screen.onkey(key="Up", fun=snake.move_up)
+screen.onkey(key="Down", fun=snake.move_down)
+screen.onkey(key="Left", fun=snake.move_left)
+screen.onkey(key="Right", fun=snake.move_right)
+screen.onkey(key="space", fun=stop_game)
 
 def update_screen():
     screen.update()
