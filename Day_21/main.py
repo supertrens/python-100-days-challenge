@@ -27,8 +27,6 @@ screen.onkey(key="Left", fun=snake.move_left)
 screen.onkey(key="Right", fun=snake.move_right)
 screen.onkey(key="space", fun=stop_game)
 
-
-
 def update_screen():
     screen.update()
     time.sleep(0.5)
@@ -36,7 +34,10 @@ def update_screen():
 while game_is_on:
   update_screen()
   snake.move_forward()
-
+  
+  if snake.head.distance(food) < 10:
+    food.set_new_food_location()
+    snake.add_new_segment(snake.tail.position())
 
 
 

@@ -16,21 +16,28 @@ class Snake:
     self.segment_list = []
     self.create_snake()
     self.head = self.segment_list[0]
+    self.set_tail()
 
   def create_snake(self):
     for num in range(0, MIN_SEGMENT):
       gap_x = num * (- SEGMENT_SIZE)
-      segment = self.create_segment(gap_x)
-      self.segment_list.append(segment)
-      
-  def create_segment(self, gap_x):
+      position = (gap_x, 0)
+      self.add_new_segment(position)
+
+  
+  def set_tail(self):
+    snake_length = len(self.segment_list)
+    self.tail = self.segment_list[snake_length - 1]
+    
+  def add_new_segment(self, position):
     segment = Turtle(shape="square")
     segment.penup()
     segment.color("#f3f3f3")
-    segment.goto(gap_x, 0)
+    segment.goto(position)
     segment.shapesize(stretch_len=0.5, stretch_wid=0.5)
+    self.segment_list.append(segment)
+    self.set_tail()
 
-    return segment
   
   def move_forward(self):
     # local variables to set updated position
