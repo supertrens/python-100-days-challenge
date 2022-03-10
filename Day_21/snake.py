@@ -1,8 +1,8 @@
 from turtle import Turtle
 
 MIN_SEGMENT = 3
-SEGMENT_SIZE = 10
-MOVE_PACE = 10
+SEGMENT_SIZE = 20
+MOVE_PACE = 20
 BOARD_LIMIT = 280
 
 DIRECTION = {
@@ -17,6 +17,8 @@ class Snake:
     self.segment_list = []
     self.create_snake()
     self.head = self.segment_list[0]
+    self.head.shape("circle")
+    
     self.set_tail()
 
   def create_snake(self):
@@ -29,19 +31,28 @@ class Snake:
   def set_tail(self):
     snake_length = len(self.segment_list)
     self.tail = self.segment_list[snake_length - 1]
-    
+  
+  def extend(self):
+    self.add_new_segment(self.tail.position())
+
   def add_new_segment(self, position):
     segment = Turtle(shape="square")
     segment.penup()
     segment.color("#f3f3f3")
     segment.goto(position)
-    segment.shapesize(stretch_len=0.5, stretch_wid=0.5)
     self.segment_list.append(segment)
     self.set_tail()
 
   def has_hit_wall(self):
     is_collission = self.head.xcor() > BOARD_LIMIT or self.head.xcor() < -BOARD_LIMIT or self.head.ycor() > BOARD_LIMIT or self.head.ycor() < -BOARD_LIMIT 
     return is_collission
+  
+  def has_hit_body(self):
+    for segment in self.segment_list[1:]:
+      if(self.head.distance(segment) < 10):
+        return True
+      
+    return False
   
   def move_forward(self):
     # local variables to set updated position

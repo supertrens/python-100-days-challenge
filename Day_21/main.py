@@ -33,19 +33,21 @@ def update_screen():
     screen.update()
     time.sleep(0.5)
 
+def game_status():
+   global game_is_on
+   if snake.head.distance(food) < 15:
+      score_board.update_score()
+      food.set_new_food_location()
+      snake.extend()
+      # Detect wall collission
+   if snake.has_hit_wall() or snake.has_hit_body():
+     game_is_on = False
+     score_board.game_over()
+
 while game_is_on:
   update_screen()
   snake.move_forward()
-  
-  if snake.head.distance(food) < 10:
-    score_board.update_score()
-    food.set_new_food_location()
-    snake.add_new_segment(snake.tail.position())
-    
-  # Detect wall collission
-  if snake.has_hit_wall():
-    game_is_on = False
-    score_board.game_over()
+  game_status()
 
 
 
