@@ -1,8 +1,8 @@
 from turtle import Turtle
 
 MIN_SEGMENT = 3
-SEGMENT_SIZE = 20
-MOVE_PACE = 20
+SEGMENT_SIZE = 10
+MOVE_PACE = 10
 
 DIRECTION = {
   "up" : 90,
@@ -28,6 +28,8 @@ class Snake:
     segment.penup()
     segment.color("#f3f3f3")
     segment.goto(gap_x, 0)
+    segment.shapesize(stretch_len=0.5, stretch_wid=0.5)
+
     return segment
   
   def move_forward(self):

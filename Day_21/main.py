@@ -1,5 +1,6 @@
 import time
 from turtle import Screen
+from food import Food
 
 from snake import Snake
 
@@ -13,6 +14,7 @@ screen.listen()
 game_is_on = True
 
 snake = Snake()
+food = Food()
 
 def stop_game():
   global game_is_on
@@ -24,6 +26,8 @@ screen.onkey(key="Down", fun=snake.move_down)
 screen.onkey(key="Left", fun=snake.move_left)
 screen.onkey(key="Right", fun=snake.move_right)
 screen.onkey(key="space", fun=stop_game)
+
+
 
 def update_screen():
     screen.update()
