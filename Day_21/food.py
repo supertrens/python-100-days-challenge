@@ -9,7 +9,7 @@ class Food(Turtle):
     super().__init__(shape="square")
     self.configure_food()
     self.set_new_food_location()
-    
+  
  
   def configure_food(self):
     self.color("orangered")
