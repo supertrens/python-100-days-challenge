@@ -3,6 +3,7 @@ from turtle import Turtle
 MIN_SEGMENT = 3
 SEGMENT_SIZE = 10
 MOVE_PACE = 10
+BOARD_LIMIT = 280
 
 DIRECTION = {
   "up" : 90,
@@ -38,6 +39,9 @@ class Snake:
     self.segment_list.append(segment)
     self.set_tail()
 
+  def has_hit_wall(self):
+    is_collission = self.head.xcor() > BOARD_LIMIT or self.head.xcor() < -BOARD_LIMIT or self.head.ycor() > BOARD_LIMIT or self.head.ycor() < -BOARD_LIMIT 
+    return is_collission
   
   def move_forward(self):
     # local variables to set updated position

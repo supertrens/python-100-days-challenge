@@ -41,6 +41,11 @@ while game_is_on:
     score_board.update_score()
     food.set_new_food_location()
     snake.add_new_segment(snake.tail.position())
+    
+  # Detect wall collission
+  if snake.has_hit_wall():
+    game_is_on = False
+    score_board.game_over()
 
 
 
